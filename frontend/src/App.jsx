@@ -30,14 +30,12 @@ function App() {
       setLoading(true);
       setMessage("");
 
-      const tokenResponse = await axios.get(
-        "http://localhost:5000/api/token"
-      );
+      const tokenResponse = await axios.get("/api/token");
 
       const token = tokenResponse.data.token;
-
-      const response = await axios.get(
-        "http://localhost:5000/api/search",
+      
+const response = await axios.get(
+  "/api/search",
         {
           params: {
             term: customSearchTerm,
