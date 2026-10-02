@@ -75,9 +75,11 @@ function App() {
       });
     } catch (error) {
       console.error("Search error:", error);
+
       setMessage(
         "Something went wrong while searching. Please try again."
       );
+
       setResults([]);
     } finally {
       setLoading(false);
@@ -267,8 +269,7 @@ function App() {
   const renderMediaCard = (item, index) => {
     const favourite = isFavourite(item);
 
-    const isMovie =
-      mediaType === "movie";
+    const isMovie = mediaType === "movie";
 
     const isMusic =
       mediaType === "music" && Boolean(item.previewUrl);
@@ -357,7 +358,8 @@ function App() {
                   : "♡ Add to My Vault"}
               </button>
 
-              {item.trackViewUrl && (
+              {/* Apple link is hidden for movies */}
+              {item.trackViewUrl && !isMovie && (
                 <a
                   href={item.trackViewUrl}
                   target="_blank"
@@ -426,41 +428,15 @@ function App() {
                   }
                   style={{ maxWidth: "180px" }}
                 >
-                  <option value="music">
-                    Music
-                  </option>
-
-                  <option value="movie">
-                    Movies
-                  </option>
-
-                  <option value="podcast">
-                    Podcasts
-                  </option>
-
-                  <option value="audiobook">
-                    Audiobooks
-                  </option>
-
-                  <option value="shortFilm">
-                    Short Films
-                  </option>
-
-                  <option value="tvShow">
-                    TV Shows
-                  </option>
-
-                  <option value="software">
-                    Software
-                  </option>
-
-                  <option value="ebook">
-                    eBooks
-                  </option>
-
-                  <option value="all">
-                    All
-                  </option>
+                  <option value="music">Music</option>
+                  <option value="movie">Movies</option>
+                  <option value="podcast">Podcasts</option>
+                  <option value="audiobook">Audiobooks</option>
+                  <option value="shortFilm">Short Films</option>
+                  <option value="tvShow">TV Shows</option>
+                  <option value="software">Software</option>
+                  <option value="ebook">eBooks</option>
+                  <option value="all">All</option>
                 </select>
 
                 <button
@@ -468,9 +444,7 @@ function App() {
                   onClick={() => searchMedia()}
                   disabled={loading}
                 >
-                  {loading
-                    ? "Searching..."
-                    : "Search"}
+                  {loading ? "Searching..." : "Search"}
                 </button>
               </div>
 
@@ -744,6 +718,12 @@ function App() {
         <small>
           Discover. Listen. Explore.
         </small>
+
+        <div className="mt-2">
+          <small className="text-secondary">
+            © 2026 Mzimasi Bulani
+          </small>
+        </div>
       </footer>
     </div>
   );
